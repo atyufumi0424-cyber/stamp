@@ -76,10 +76,6 @@
                         <p id="scan-error-text" class="text-red-500 font-bold text-xs"></p>
                     </div>
 
-                    <!-- テストデータリセットボタン -->
-                    <div class="mt-8 pt-6 border-t border-slate-200 w-full text-center">
-                        <button onclick="resetTestData()" class="text-xs text-slate-400 hover:text-slate-600 underline decoration-slate-300">テストデータをリセットして最初からやり直す</button>
-                    </div>
                 </div>
 
                 <!-- スキャン中UI（ライブカメラ） -->
@@ -351,18 +347,6 @@
             }
             updateClock(); 
             setInterval(updateClock, 1000);
-        }
-
-        // テストデータのリセット機能
-        function resetTestData() {
-            if (confirm("これまでのスタンプ記録やニックネームのデータをすべて消去して、最初からやり直しますか？")) {
-                localStorage.removeItem('ichijo_festival_stamps');
-                localStorage.removeItem('ichijo_festival_user_name');
-                localStorage.removeItem('ichijo_festival_ticket_used');
-                localStorage.removeItem('ichijo_festival_target_id');
-                localStorage.removeItem('ichijo_festival_lap_count');
-                location.reload();
-            }
         }
 
         function submitName() {
