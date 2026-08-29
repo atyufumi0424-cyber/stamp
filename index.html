@@ -121,9 +121,9 @@
                             <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-6 shadow-inner">
                                 <p class="font-bold text-indigo-800 text-xl mb-1">模擬店 100円割引券</p>
                             </div>
-                            <!-- 獲得者の氏名を表示して本人確認に使用 -->
+                            <!-- 獲得者のニックネームを表示 -->
                             <div class="bg-slate-100 rounded-xl py-2 px-4 mb-4 text-center border border-slate-200">
-                                <p class="text-[9px] text-slate-400 font-bold">獲得者(フルネーム)</p>
+                                <p class="text-[9px] text-slate-400 font-bold">獲得者（ニックネーム）</p>
                                 <p id="ticket-user-name" class="font-bold text-slate-800 text-sm">--</p>
                             </div>
                             <p id="ticket-instruction" class="text-xs text-slate-500 mb-6 font-medium leading-relaxed">生徒会本部または景品交換所で<br/>この画面を提示してください。</p>
@@ -214,7 +214,7 @@
             </div>
         </div>
 
-        <!-- 最初のお名前入力モーダル -->
+        <!-- 最初のニックネーム入力モーダル -->
         <div id="name-input-modal" class="hidden absolute inset-0 bg-slate-900/90 backdrop-blur-md z-[5000] flex items-center justify-center p-4">
             <div class="bg-white rounded-3xl p-6 w-full max-w-sm text-center shadow-2xl transform scale-100 animate-fade-in-up">
                 <div class="w-16 h-16 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-600">
@@ -231,8 +231,8 @@
                 </div>
                 
                 <div class="space-y-4 mb-6">
-                    <input type="text" id="fullname-input" placeholder="例：一条 太郎" class="w-full px-4 py-3.5 bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-lg focus:outline-none focus:border-indigo-500 transition-colors">
-                    <p id="name-validation-error" class="hidden text-xs text-red-500 font-bold"><i data-lucide="alert-circle" class="w-3.5 h-3.5 inline mr-1 -mt-0.5"></i>名字と名前の間にスペース（空白）を空けて入力してください</p>
+                    <input type="text" id="fullname-input" placeholder="例：いちじょう" class="w-full px-4 py-3.5 bg-slate-100 border-2 border-slate-200 rounded-xl text-center font-bold text-lg focus:outline-none focus:border-indigo-500 transition-colors">
+                    <p id="name-validation-error" class="hidden text-xs text-red-500 font-bold"><i data-lucide="alert-circle" class="w-3.5 h-3.5 inline mr-1 -mt-0.5"></i>ニックネームを入力してください</p>
                 </div>
 
                 <button onclick="submitName()" class="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-4 rounded-xl font-bold text-lg shadow-md transition-colors flex items-center justify-center">
@@ -245,7 +245,7 @@
         <nav class="bg-white border-t border-slate-200 flex justify-around px-2 pt-2 z-50 shrink-0 pb-safe shadow-[0_-4px_10px_rgba(0,0,0,0.03)] absolute bottom-0 w-full">
             <button onclick="switchTab('scan')" id="nav-scan" class="nav-btn flex flex-col items-center w-1/3 py-2 text-indigo-600 transition-colors">
                 <div class="p-1 rounded-xl mb-1 transition-colors group-hover:bg-indigo-50" id="nav-icon-bg-scan"><i data-lucide="scan" class="w-6 h-6"></i></div>
-                <span class="text-[10px] font-bold">ミッション</span>
+                <span class="text-[10px] font-bold">スキャン</span>
             </button>
             <button onclick="switchTab('stamps')" id="nav-stamps" class="nav-btn flex flex-col items-center w-1/3 py-2 text-slate-400 transition-colors relative">
                 <div class="p-1 rounded-xl mb-1 transition-colors" id="nav-icon-bg-stamps"><i data-lucide="map" class="w-6 h-6"></i></div>
@@ -273,23 +273,22 @@
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycbw1jPhVdaKLAvmzqCB-fozTGuCrrFb0sw0gN92kt71bs-B9LHa59nO2Dq_nyko-5sUP/exec"; 
 
         const SPOTS = [
-            // 高校1年生 (アトラクション) - id: 1~7
-            { id: 1, name: "1年1組", label: "謎解き迷路", type: "1年アトラクション", desc: "高校1年生：謎解き迷路が楽しめるアトラクションスポットです。", mission: "出口にいるスタッフに「脱出成功！」と元気よく伝えよう！" },
-            { id: 2, name: "1年2組", label: "おばけやしき", type: "1年アトラクション", desc: "高校1年生：スリルと恐怖を体験できる本格おばけやしき！", mission: "出口にいるスタッフに「全然怖くなかったよ！」と強がってみよう！" },
-            { id: 3, name: "1年3組", label: "おばけやしき", type: "1年アトラクション", desc: "高校1年生：暗闇に隠された驚きが待つおばけやしきスポット。", mission: "出口にいるスタッフと「おばけポーズ」をしてから帰ろう！" },
-            { id: 4, name: "1年4組", label: "キッキングスナイパー", type: "1年アトラクション", desc: "高校1年生：狙いを定めて蹴り倒すキッキングスナイパー！", mission: "終わった後、スタッフに「ナイスキック！」と声をかけよう！" },
-            { id: 5, name: "1年5組", label: "カジノ", type: "1年アトラクション", desc: "高校1年生：カジノゲームのスリルを安全に楽しめる特設ブース。", mission: "帰る時に、スタッフへ「サンキュー、ディーラー！」と挨拶しよう！" },
-            { id: 6, name: "1年6組", label: "遊園地", type: "1年アトラクション", desc: "高校1年生：楽しいアトラクションが詰まったミニ遊園地エリア。", mission: "遊び終わった後、スタッフに両手で大きく手を振ろう！" },
-            { id: 7, name: "1年7組", label: "アーチ", type: "1年アトラクション", desc: "高校1年生：学校を華やかに彩る記念アーチ・ゲートスポット。", mission: "アーチの近くのスタッフに「文化祭最高！」と声をかけよう！" },
+            // 高校1年生 (アトラクション) - id: 1~6
+            { id: 1, name: "1年1組", label: "謎解き迷Q", type: "1年アトラクション", desc: "謎解き迷宮" },
+            { id: 2, name: "1年2組", label: "戦慄の馬場迷宮", type: "1年アトラクション", desc: "お化け屋敷" },
+            { id: 3, name: "1年3組", label: "夜の学校へようこそ・・・1年3組お化け屋敷", type: "1年アトラクション", desc: "お化け屋敷" },
+            { id: 4, name: "1年4組", label: "VS一志！！", type: "1年アトラクション", desc: "キックターゲット" },
+            { id: 5, name: "1年5組", label: "フロンティアゲーム", type: "1年アトラクション", desc: "ハイアンドロー、ブラックジャック、ダーツ" },
+            { id: 6, name: "1年6組", label: "メリーゴーランド", type: "1年アトラクション", desc: "メリーゴーランド" },
             
             // 高校2年生 (物品販売・出展) - id: 8~14
-            { id: 8, name: "2年1組", label: "缶バッジ・チェキ", type: "2年物販・展示", desc: "高校2年生：思い出のチェキ撮影やオリジナル缶バッジを販売！", mission: "スタッフに「おすすめの缶バッジはどれですか？」と聞いてみよう！" },
-            { id: 9, name: "2年2組", label: "ラバーバンド・エコバッグ", type: "2年物販・展示", desc: "高校2年生：お揃いで付けたいラバーバンドと便利なエコバッグ。", mission: "ブースを出る時に、スタッフへ「エコバッグ便利そう！」と声をかけよう！" },
-            { id: 10, name: "2年3組", label: "キーホルダー・ラバーバンド", type: "2年物販・展示", desc: "高校2年生：限定オリジナルデザインのキーホルダーとラバーバンド！", mission: "スタッフに「一番人気のキーホルダーはどれですか？」と質問してみよう！" },
-            { id: 11, name: "2年4組", label: "タオル・ステッカー", type: "2年物販・展示", desc: "高校2年生：マストハブな特製タオルと、どこにでも貼れるステッカー！", mission: "ブースを出る時に、スタッフへ「ステッカー可愛いですね！」と伝えよう！" },
-            { id: 12, name: "2年5組", label: "タオル・目印チャーム", type: "2年物販・展示", desc: "高校2年生：実用的なタオルとお気に入りのバッグに付けたい目印チャーム。", mission: "スタッフに「このタオルのおすすめポイントは？」と聞いてみよう！" },
-            { id: 13, name: "2年6組", label: "ヘアバンド・前髪クリップ", type: "2年物販・展示", desc: "高校2年生：日常でも大活躍する可愛いヘアバンドと前髪クリップ！", mission: "ブースを出る時に、スタッフと笑顔で両手を振り合おう！" },
-            { id: 14, name: "2年7組", label: "缶バッジ・クリアボトル", type: "2年物販・展示", desc: "高校2年生：限定クリアボトルとお気に入りの絵柄の缶バッジ！", mission: "ブースを出る時に、スタッフへ「ボトルおしゃれですね！」と声をかけよう！" }
+            { id: 8, name: "2年1組", label: "缶バッジ・チェキ", type: "2年物販・展示", desc: "缶バッジ、チェキ" },
+            { id: 9, name: "2年2組", label: "和背負！笑心祭", type: "2年物販・展示", desc: "和背負！笑心祭" },
+            { id: 10, name: "2年3組", label: "アイスバンド！！", type: "2年物販・展示", desc: "ラバーバンド、ビーズキーホルダー、アイロンビーズキーホルダー" },
+            { id: 11, name: "2年4組", label: "IZUHARA HAWAIIAN SHOP", type: "2年物販・展示", desc: "タオル、ステッカー" },
+            { id: 12, name: "2年5組", label: "喫茶カワイ", type: "2年物販・展示", desc: "タオル、チャーム" },
+            { id: 13, name: "2年6組", label: "ALOHA CLASS26", type: "2年物販・展示", desc: "ヘアクリップ、ヘアバンド" },
+            { id: 14, name: "2年7組", label: "缶バッジ・クリアボトル", type: "2年物販・展示", desc: "缶バッジ、クリアボトル" }
         ];
 
         let stamps = [];
@@ -330,7 +329,7 @@
             }
         }
 
-        // 確認完了後にお名前入力へ進む
+        // 確認完了後にニックネーム入力へ進む
         function goToNameInput() {
             document.getElementById('welcome-confirm-modal').classList.add('hidden');
             document.getElementById('name-input-modal').classList.remove('hidden');
@@ -355,7 +354,7 @@
 
         // テストデータのリセット機能
         function resetTestData() {
-            if (confirm("これまでのスタンプ記録やお名前のデータをすべて消去して、最初からやり直しますか？")) {
+            if (confirm("これまでのスタンプ記録やニックネームのデータをすべて消去して、最初からやり直しますか？")) {
                 localStorage.removeItem('ichijo_festival_stamps');
                 localStorage.removeItem('ichijo_festival_user_name');
                 localStorage.removeItem('ichijo_festival_ticket_used');
@@ -370,9 +369,7 @@
             const nameValue = input.value.trim();
             const errorElement = document.getElementById('name-validation-error');
             
-            const hasSpace = nameValue.includes(' ') || nameValue.includes('　');
-            
-            if (nameValue.length < 2 || !hasSpace) {
+            if (nameValue.length < 1) {
                 errorElement.classList.remove('hidden');
                 if (window.lucide) lucide.createIcons();
                 return;
@@ -381,7 +378,7 @@
             errorElement.classList.add('hidden');
             userName = nameValue;
             
-            // 入力されたお名前を保存
+            // 入力されたニックネームを保存
             localStorage.setItem('ichijo_festival_user_name', userName);
             
             document.getElementById('name-input-modal').classList.add('hidden');
@@ -394,6 +391,8 @@
                 try { 
                     stamps = JSON.parse(savedData); 
                     if (!Array.isArray(stamps)) stamps = [];
+                    const validSpotIds = new Set(SPOTS.map(spot => spot.id));
+                    stamps = stamps.filter(id => validSpotIds.has(id));
                 } catch (e) { stamps = []; }
             }
             updateAllUI(); // 画面全体を構築して読み込み中を解除
@@ -406,7 +405,7 @@
             if (isDrawing) return;
             isDrawing = true;
             
-            const stampsAttraction = stamps.filter(id => id <= 7);
+            const stampsAttraction = stamps.filter(id => id <= 6);
             const stampsShop = stamps.filter(id => id >= 8);
             
             const needAttraction = Math.max(0, 4 - stampsAttraction.length);
@@ -430,7 +429,7 @@
             
             let candidateSpots = [];
             if (targetGenre === 'ATTRACTION') {
-                candidateSpots = SPOTS.filter(s => s.id <= 7 && !stamps.includes(s.id));
+                candidateSpots = SPOTS.filter(s => s.id <= 6 && !stamps.includes(s.id));
             } else {
                 candidateSpots = SPOTS.filter(s => s.id >= 8 && !stamps.includes(s.id));
             }
@@ -485,7 +484,7 @@
             }
 
             if (!currentTargetId) {
-                const stampsA = stamps.filter(id => id <= 7).length;
+                const stampsA = stamps.filter(id => id <= 6).length;
                 const stampsB = stamps.filter(id => id >= 8).length;
                 
                 section.innerHTML = `
@@ -528,19 +527,12 @@
                         <span class="text-2xl font-black text-rose-900 leading-tight">${target.label}</span>
                         <span class="text-xs text-rose-700 font-bold mt-2">${target.desc}</span>
                         
-                        <div class="mt-4 w-full bg-white border-2 border-rose-100 rounded-xl p-3 shadow-sm">
-                            <div class="flex items-center justify-center space-x-1 mb-1">
-                                <i data-lucide="flame" class="w-4 h-4 text-rose-500"></i>
-                                <p class="text-[10px] font-black text-rose-500 tracking-wider">クラスミッション</p>
-                            </div>
-                            <p class="text-sm font-bold text-slate-700">${target.mission}</p>
-                        </div>
                     </div>
                     <button onclick="startScanner()" class="group relative bg-indigo-600 text-white w-40 h-40 rounded-full flex flex-col items-center justify-center shadow-[0_10px_25px_rgba(79,70,229,0.4)] hover:-translate-y-1 transition-all duration-300 border-4 border-indigo-300 shrink-0">
                         <i data-lucide="scan" class="w-12 h-12 mb-2 group-hover:scale-110 transition-transform duration-300"></i>
                         <span class="font-bold text-lg">カメラ起動</span>
                     </button>
-                    <p class="text-xs text-slate-400 font-bold mt-4 text-center">※ミッションをクリアしたら<br>クラスのQRコードを読み取ろう！</p>
+                    <p class="text-xs text-slate-400 font-bold mt-4 text-center">クラスのQRコードを読み取ろう！</p>
                 `;
             }
             if (window.lucide) lucide.createIcons();
@@ -812,7 +804,7 @@
         // ★ 2回目・3回目の周回を開始する処理
         // ==========================================
         function startNextLap() {
-            if (confirm(`スタンプをリセットして、${lapCount + 1}周目のスタンプラリーを開始しますか？\n（お名前はそのまま引き継がれます）`)) {
+            if (confirm(`スタンプをリセットして、${lapCount + 1}周目のスタンプラリーを開始しますか？\n（ニックネームはそのまま引き継がれます）`)) {
                 stamps = [];
                 ticketUsed = false;
                 currentTargetId = null;
