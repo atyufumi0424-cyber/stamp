@@ -44,7 +44,7 @@
             <div class="flex flex-col">
                 <h1 class="text-xl font-bold tracking-wider leading-tight">文化祭スタンプラリー</h1>
                 <div class="flex items-center mt-1 space-x-2">
-                    <p class="text-[10px] text-indigo-200">全5箇所（アトラクション4・展示物販1）で特典！</p>
+                    <p class="text-[10px] text-indigo-200">1周5箇所を巡ってスタンプを集めよう！</p>
                     <span id="current-time" class="text-[10px] font-mono bg-indigo-800 px-1.5 py-0.5 rounded border border-indigo-500 shadow-inner">00:00:00</span>
                 </div>
             </div>
@@ -97,50 +97,11 @@
                 <div class="flex flex-col items-center mb-6">
                     <h2 class="text-2xl font-bold text-indigo-900 mb-1">スタンプコレクション</h2>
                     <div class="w-16 h-1 bg-indigo-300 rounded-full mb-2"></div>
-                    <p class="text-sm text-slate-500">くじ引きで指定された5箇所を巡って特典GET！</p>
+                    <p class="text-sm text-slate-500">くじ引きで指定された場所を巡ろう！</p>
                 </div>
                 <div id="stamp-list-container" class="flex flex-col space-y-4"></div>
             </section>
 
-            <!-- 3. 特典画面 -->
-            <section id="tab-ticket" class="tab-content p-6 min-h-full bg-slate-900 items-center justify-start pt-16 text-center pb-32">
-                <!-- 特典アンロック後 -->
-                <div id="ticket-unlocked" class="hidden w-full max-w-sm animate-fade-in-up">
-                    <div class="relative bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-600 p-1.5 rounded-[2rem] shadow-[0_0_40px_rgba(251,191,36,0.4)]">
-                        <div class="bg-white rounded-[1.7rem] p-8 relative overflow-hidden">
-                            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500"></div>
-                            <div class="relative">
-                                <i data-lucide="gift" class="w-16 h-16 mx-auto text-amber-500 mb-3 animate-bounce"></i>
-                            </div>
-                            <p class="text-xs font-bold text-amber-600 tracking-widest mb-1">5 SPOTS CLEARED</p>
-                            <h2 class="text-3xl font-black text-indigo-900 mb-6 border-b border-slate-200 pb-4">コンプリート特典</h2>
-                            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 mb-6 shadow-inner">
-                                <p class="font-bold text-indigo-800 text-xl mb-1">模擬店 100円割引券</p>
-                            </div>
-                            <!-- 獲得者のニックネームを表示 -->
-                            <div class="bg-slate-100 rounded-xl py-2 px-4 mb-4 text-center border border-slate-200">
-                                <p class="text-[9px] text-slate-400 font-bold">獲得者（ニックネーム）</p>
-                                <p id="ticket-user-name" class="font-bold text-slate-800 text-sm">--</p>
-                            </div>
-                            <p id="ticket-instruction" class="text-xs text-slate-500 mb-6 font-medium leading-relaxed">生徒会本部または景品交換所で<br/>この画面を提示してください。</p>
-                            <!-- チケット利用ボタン表示エリア -->
-                            <div id="ticket-action-area"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 特典ロック中 -->
-                <div id="ticket-locked" class="text-white flex flex-col items-center mt-8">
-                    <div class="w-24 h-24 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-6">
-                        <i data-lucide="trophy" class="w-10 h-10 text-slate-500"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-3 tracking-wide">まだ特典はありません</h2>
-                    <p class="text-slate-400 mb-10 text-sm leading-relaxed">くじ引きで指定されたクラスの<br>スタンプを5つ集めよう！</p>
-                    <button onclick="switchTab('scan')" class="bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-3.5 rounded-full font-bold transition-all shadow-[0_0_15px_rgba(79,70,229,0.3)]">
-                        くじ引き・スキャンに戻る
-                    </button>
-                </div>
-            </section>
         </main>
 
         <!-- 獲得結果ポップアップ -->
@@ -240,22 +201,14 @@
 
         <!-- ボトムナビゲーション -->
         <nav class="bg-white border-t border-slate-200 flex justify-around px-2 pt-2 z-50 shrink-0 pb-safe shadow-[0_-4px_10px_rgba(0,0,0,0.03)] absolute bottom-0 w-full">
-            <button onclick="switchTab('scan')" id="nav-scan" class="nav-btn flex flex-col items-center w-1/3 py-2 text-indigo-600 transition-colors">
+            <button onclick="switchTab('scan')" id="nav-scan" class="nav-btn flex flex-col items-center w-1/2 py-2 text-indigo-600 transition-colors">
                 <div class="p-1 rounded-xl mb-1 transition-colors group-hover:bg-indigo-50" id="nav-icon-bg-scan"><i data-lucide="scan" class="w-6 h-6"></i></div>
                 <span class="text-[10px] font-bold">スキャン</span>
             </button>
-            <button onclick="switchTab('stamps')" id="nav-stamps" class="nav-btn flex flex-col items-center w-1/3 py-2 text-slate-400 transition-colors relative">
+            <button onclick="switchTab('stamps')" id="nav-stamps" class="nav-btn flex flex-col items-center w-1/2 py-2 text-slate-400 transition-colors relative">
                 <div class="p-1 rounded-xl mb-1 transition-colors" id="nav-icon-bg-stamps"><i data-lucide="map" class="w-6 h-6"></i></div>
                 <span id="nav-stamp-badge" class="hidden absolute top-1 right-[28%] bg-red-500 text-white text-[9px] font-bold px-1.5 rounded-full shadow-sm ring-2 ring-white">0</span>
                 <span class="text-[10px] font-bold">スタンプ帳</span>
-            </button>
-            <button onclick="switchTab('ticket')" id="nav-ticket" class="nav-btn flex flex-col items-center w-1/3 py-2 text-slate-400 transition-colors relative">
-                <div class="p-1 rounded-xl mb-1 transition-colors" id="nav-icon-bg-ticket"><i data-lucide="ticket" class="w-6 h-6"></i></div>
-                <span id="nav-ticket-ping" class="hidden absolute top-2 right-[30%] flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500 border-2 border-white"></span>
-                </span>
-                <span class="text-[10px] font-bold">特典</span>
             </button>
         </nav>
     </div>
@@ -289,13 +242,13 @@
         ];
 
         let stamps = [];
+        let visitedSpots = [];
         let html5QrCode = null; 
         let isProcessing = false;
         let isDrawing = false;
 
         // ★ 一番安定していた初期の保存方式とキー名に完全に戻しました（余計な安全装置を解除）
         let userName = localStorage.getItem('ichijo_festival_user_name');
-        let ticketUsed = localStorage.getItem('ichijo_festival_ticket_used') === 'true';
         let currentTargetId = localStorage.getItem('ichijo_festival_target_id') ? parseInt(localStorage.getItem('ichijo_festival_target_id')) : null;
         let lapCount = parseInt(localStorage.getItem('ichijo_festival_lap_count') || '1');
 
@@ -371,15 +324,30 @@
         }
 
         function completeInit() {
+            lapCount = lapCount > 1 ? 2 : 1;
+            localStorage.setItem('ichijo_festival_lap_count', lapCount.toString());
+            const validSpotIds = new Set(SPOTS.map(spot => spot.id));
             const savedData = localStorage.getItem('ichijo_festival_stamps');
             if (savedData) {
                 try { 
                     stamps = JSON.parse(savedData); 
                     if (!Array.isArray(stamps)) stamps = [];
-                    const validSpotIds = new Set(SPOTS.map(spot => spot.id));
                     stamps = stamps.filter(id => validSpotIds.has(id));
                 } catch (e) { stamps = []; }
             }
+            const savedVisited = localStorage.getItem('ichijo_festival_visited_spots');
+            if (savedVisited) {
+                try {
+                    visitedSpots = JSON.parse(savedVisited);
+                    if (!Array.isArray(visitedSpots)) visitedSpots = [];
+                    visitedSpots = visitedSpots.filter(id => validSpotIds.has(id));
+                } catch (e) { visitedSpots = []; }
+            } else {
+                // 既存利用者の現在のスタンプを訪問履歴へ引き継ぐ
+                visitedSpots = [...stamps];
+                localStorage.setItem('ichijo_festival_visited_spots', JSON.stringify(visitedSpots));
+            }
+            localStorage.removeItem('ichijo_festival_ticket_used');
             updateAllUI(); // 画面全体を構築して読み込み中を解除
         }
 
@@ -389,42 +357,41 @@
         function drawLottery() {
             if (isDrawing) return;
             isDrawing = true;
+            let candidateSpots = [];
+            if (lapCount === 1) {
+                const stampsAttraction = stamps.filter(id => id <= 6);
+                const stampsShop = stamps.filter(id => id >= 8);
+                const needAttraction = Math.max(0, 4 - stampsAttraction.length);
+                const needShop = Math.max(0, 1 - stampsShop.length);
+
+                let targetGenre = '';
+                if (needAttraction === 0) {
+                    targetGenre = 'SHOP';
+                } else if (needShop === 0) {
+                    targetGenre = 'ATTRACTION';
+                } else {
+                    const r = Math.random() * (needAttraction + needShop);
+                    targetGenre = (r < needAttraction) ? 'ATTRACTION' : 'SHOP';
+                }
+
+                if (targetGenre === 'ATTRACTION') {
+                    candidateSpots = SPOTS.filter(s => s.id <= 6 && !visitedSpots.includes(s.id));
+                } else {
+                    candidateSpots = SPOTS.filter(s => s.id >= 8 && !visitedSpots.includes(s.id));
+                }
+            } else {
+                // 2周目は1周目を含む過去の訪問先をすべて除外
+                candidateSpots = SPOTS.filter(s => !visitedSpots.includes(s.id));
+            }
             
-            const stampsAttraction = stamps.filter(id => id <= 6);
-            const stampsShop = stamps.filter(id => id >= 8);
-            
-            const needAttraction = Math.max(0, 4 - stampsAttraction.length);
-            const needShop = Math.max(0, 1 - stampsShop.length);
-            
-            if (needAttraction === 0 && needShop === 0) {
+            if (candidateSpots.length === 0) {
                 isDrawing = false;
                 updateScanUI();
                 return;
             }
-            
-            let targetGenre = '';
-            if (needAttraction === 0) {
-                targetGenre = 'SHOP';
-            } else if (needShop === 0) {
-                targetGenre = 'ATTRACTION';
-            } else {
-                const r = Math.random() * (needAttraction + needShop);
-                targetGenre = (r < needAttraction) ? 'ATTRACTION' : 'SHOP';
-            }
-            
-            let candidateSpots = [];
-            if (targetGenre === 'ATTRACTION') {
-                candidateSpots = SPOTS.filter(s => s.id <= 6 && !stamps.includes(s.id));
-            } else {
-                candidateSpots = SPOTS.filter(s => s.id >= 8 && !stamps.includes(s.id));
-            }
-            
-            if (candidateSpots.length === 0) {
-                candidateSpots = SPOTS.filter(s => !stamps.includes(s.id));
-            }
 
             const finalSpot = candidateSpots[Math.floor(Math.random() * candidateSpots.length)];
-            const allAvailableSpots = SPOTS.filter(s => !stamps.includes(s.id));
+            const allAvailableSpots = candidateSpots;
 
             const display = document.getElementById('lottery-display');
             display.classList.remove('text-indigo-300', 'text-3xl');
@@ -457,13 +424,26 @@
             if (!section) return;
 
             if (stamps.length >= 5) {
-                section.innerHTML = `
-                    <div class="bg-yellow-50 border-4 border-yellow-200 w-full p-6 rounded-3xl flex flex-col items-center justify-center shadow-inner text-center">
-                        <i data-lucide="award" class="w-16 h-16 text-yellow-500 mb-2"></i>
-                        <span class="text-xl font-black text-yellow-700">目標の5箇所をクリア！</span>
-                        <span class="text-sm text-yellow-600 font-bold mt-2">特典画面から割引券をご利用ください</span>
-                    </div>
-                `;
+                if (lapCount === 1) {
+                    section.innerHTML = `
+                        <div class="bg-yellow-50 border-4 border-yellow-200 w-full p-6 rounded-3xl flex flex-col items-center justify-center shadow-inner text-center">
+                            <i data-lucide="award" class="w-16 h-16 text-yellow-500 mb-2"></i>
+                            <span class="text-xl font-black text-yellow-700">1周目の5箇所をクリア！</span>
+                            <span class="text-sm text-yellow-600 font-bold mt-2 mb-5">2周目は、まだ回っていない場所だけが選ばれます</span>
+                            <button onclick="startNextLap()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-xl font-bold shadow-lg transition-colors flex items-center justify-center text-lg border-b-4 border-indigo-800 active:translate-y-1 active:border-b-0">
+                                <i data-lucide="refresh-cw" class="w-6 h-6 mr-2"></i>2周目を始める！
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    section.innerHTML = `
+                        <div class="bg-yellow-50 border-4 border-yellow-200 w-full p-6 rounded-3xl flex flex-col items-center justify-center shadow-inner text-center">
+                            <i data-lucide="award" class="w-16 h-16 text-yellow-500 mb-2"></i>
+                            <span class="text-xl font-black text-yellow-700">2周目の5箇所をクリア！</span>
+                            <span class="text-sm text-yellow-600 font-bold mt-2">スタンプラリー完了です！</span>
+                        </div>
+                    `;
+                }
                 if (window.lucide) lucide.createIcons();
                 return;
             }
@@ -471,8 +451,7 @@
             if (!currentTargetId) {
                 const stampsA = stamps.filter(id => id <= 6).length;
                 const stampsB = stamps.filter(id => id >= 8).length;
-                
-                section.innerHTML = `
+                const progressPanel = lapCount === 1 ? `
                     <div class="w-full flex justify-around mb-4 bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
                         <div class="text-center">
                             <p class="text-[10px] text-slate-400 font-bold">アトラクション</p>
@@ -484,6 +463,15 @@
                             <p class="text-sm font-black text-rose-500">${stampsB} / 1</p>
                         </div>
                     </div>
+                ` : `
+                    <div class="w-full mb-4 bg-white p-3 rounded-2xl shadow-sm border border-slate-100 text-center">
+                        <p class="text-[10px] text-slate-400 font-bold">2周目・未訪問スポット</p>
+                        <p class="text-sm font-black text-indigo-600">${stamps.length} / 5</p>
+                    </div>
+                `;
+                
+                section.innerHTML = `
+                    ${progressPanel}
                     <h2 class="text-xl font-bold text-indigo-900 mb-2">次の目的地を決めよう</h2>
                     <p class="text-xs text-slate-500 text-center mb-6">くじ引きで出たクラスに行って<br/>スタンプを集めてください！</p>
                     <div id="lottery-display" class="bg-white border-4 border-indigo-200 w-full h-24 rounded-2xl flex items-center justify-center text-3xl font-black text-indigo-300 mb-6 shadow-inner tracking-widest">
@@ -636,13 +624,15 @@
         }
 
         function handleStampSuccess(spot) {
-            const alreadyGot = stamps.includes(spot.id);
+            const alreadyGot = visitedSpots.includes(spot.id);
             
             if (!alreadyGot) {
                 stamps.push(spot.id);
+                visitedSpots.push(spot.id);
                 
                 // スタンプを保存して目的地をリセット
                 localStorage.setItem('ichijo_festival_stamps', JSON.stringify(stamps));
+                localStorage.setItem('ichijo_festival_visited_spots', JSON.stringify(visitedSpots));
                 currentTargetId = null;
                 localStorage.removeItem('ichijo_festival_target_id');
 
@@ -653,18 +643,21 @@
                     userId: userName, 
                     spotId: spot.id,
                     spotName: spot.name + " (" + spot.label + ")",
-                    totalStamps: stamps.length
+                    totalStamps: visitedSpots.length,
+                    lapCount: lapCount
                 });
                 
                 if (stamps.length >= 5) {
                     sendDataToGAS("saveComplete", {
                         userId: userName,
-                        totalStamps: stamps.length
+                        totalStamps: visitedSpots.length,
+                        lapCount: lapCount
                     });
 
                     setTimeout(() => {
                         closeResultModal();
-                        switchTab('ticket');
+                        switchTab('scan');
+                        updateScanUI();
                     }, 2500);
                 } else {
                     updateScanUI();
@@ -679,10 +672,8 @@
             
             const displayName = lapCount > 1 ? `${userName} (${lapCount}周目)` : userName;
             const nameEl = document.getElementById('display-user-name');
-            const ticketNameEl = document.getElementById('ticket-user-name');
             
             if(nameEl) nameEl.textContent = displayName;
-            if(ticketNameEl) ticketNameEl.textContent = displayName;
 
             const count = stamps.length;
             const countEl = document.getElementById('header-stamp-count');
@@ -698,17 +689,7 @@
                 }
             }
             
-            const ping = document.getElementById('nav-ticket-ping');
-            if (ping) {
-                if (count >= 5) {
-                    ping.classList.remove('hidden'); 
-                } else {
-                    ping.classList.add('hidden');
-                }
-            }
-            
             renderStamps();
-            updateTicketScreen();
             updateScanUI();
         }
 
@@ -717,7 +698,7 @@
             if(!container) return;
             container.innerHTML = ''; 
             SPOTS.forEach((spot, index) => {
-                const isStamped = stamps.includes(spot.id);
+                const isStamped = visitedSpots.includes(spot.id);
                 const card = document.createElement('div');
                 card.className = `flex items-center p-4 rounded-2xl border transition-all duration-300 ${isStamped ? 'bg-white border-indigo-200 shadow-md transform hover:-translate-y-1' : 'bg-slate-50 border-slate-200 border-dashed'}`;
                 
@@ -744,59 +725,15 @@
             if(window.lucide) lucide.createIcons();
         }
 
-        function updateTicketScreen() {
-            if (stamps.length >= 5) {
-                document.getElementById('ticket-unlocked').classList.remove('hidden');
-                document.getElementById('ticket-locked').classList.add('hidden');
-                
-                const actionArea = document.getElementById('ticket-action-area');
-                const instruction = document.getElementById('ticket-instruction');
-                
-                if (ticketUsed) {
-                    instruction.innerHTML = "この特典は利用済みです。<br>もう一度最初から遊ぶことができます！";
-                    actionArea.innerHTML = `
-                        <div class="bg-slate-200 text-slate-500 py-3 rounded-xl font-bold flex items-center justify-center border-2 border-slate-300 mb-4">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2"></i>利用済み
-                        </div>
-                        <button onclick="startNextLap()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-4 rounded-xl font-bold shadow-lg transition-colors flex items-center justify-center text-lg animate-pulse-soft border-b-4 border-indigo-800 active:translate-y-1 active:border-b-0">
-                            <i data-lucide="refresh-cw" class="w-6 h-6 mr-2"></i>${lapCount + 1}周目に挑戦する！
-                        </button>
-                    `;
-                } else {
-                    instruction.innerHTML = "生徒会本部または景品交換所でこの画面を提示し、<br/>スタッフの前で「利用する」ボタンを押してください。";
-                    actionArea.innerHTML = `
-                        <button onclick="useTicket()" class="w-full bg-red-500 hover:bg-red-600 text-white py-4 rounded-xl font-bold shadow-lg transition-colors flex items-center justify-center text-lg animate-pulse-soft border-b-4 border-red-700 active:translate-y-1 active:border-b-0">
-                            <i data-lucide="ticket" class="w-6 h-6 mr-2"></i>特典を利用する
-                        </button>
-                    `;
-                }
-                if(window.lucide) lucide.createIcons();
-            } else {
-                document.getElementById('ticket-unlocked').classList.add('hidden');
-                document.getElementById('ticket-locked').classList.remove('hidden');
-            }
-        }
-
-        function useTicket() {
-            if (confirm("特典を利用済みにしますか？\n※必ずスタッフの目の前で「OK」を押してください。取り消しはできません。")) {
-                ticketUsed = true;
-                localStorage.setItem('ichijo_festival_ticket_used', 'true');
-                updateTicketScreen();
-            }
-        }
-
-        // ==========================================
-        // ★ 2回目・3回目の周回を開始する処理
-        // ==========================================
+        // 1周目の訪問履歴を残したまま2周目を開始する
         function startNextLap() {
-            if (confirm(`スタンプをリセットして、${lapCount + 1}周目のスタンプラリーを開始しますか？\n（ニックネームはそのまま引き継がれます）`)) {
+            if (lapCount !== 1 || stamps.length < 5) return;
+            if (confirm("1周目で回っていない場所を巡る、2周目を開始しますか？")) {
                 stamps = [];
-                ticketUsed = false;
                 currentTargetId = null;
-                lapCount++;
+                lapCount = 2;
                 
-                localStorage.removeItem('ichijo_festival_stamps');
-                localStorage.removeItem('ichijo_festival_ticket_used');
+                localStorage.setItem('ichijo_festival_stamps', JSON.stringify(stamps));
                 localStorage.removeItem('ichijo_festival_target_id');
                 localStorage.setItem('ichijo_festival_lap_count', lapCount.toString());
                 
