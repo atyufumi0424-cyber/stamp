@@ -223,13 +223,14 @@
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycbw1jPhVdaKLAvmzqCB-fozTGuCrrFb0sw0gN92kt71bs-B9LHa59nO2Dq_nyko-5sUP/exec"; 
 
         const SPOTS = [
-            // 高校1年生 (アトラクション) - id: 1~6
+            // 高校1年生 (アトラクション) - id: 1~7
             { id: 1, name: "1年1組", label: "謎解き迷Q", type: "1年アトラクション", desc: "謎解き迷宮" },
             { id: 2, name: "1年2組", label: "戦慄の馬場迷宮", type: "1年アトラクション", desc: "お化け屋敷" },
             { id: 3, name: "1年3組", label: "夜の学校へようこそ・・・1年3組お化け屋敷", type: "1年アトラクション", desc: "お化け屋敷" },
             { id: 4, name: "1年4組", label: "VS一志！！", type: "1年アトラクション", desc: "キックターゲット" },
             { id: 5, name: "1年5組", label: "フロンティアゲーム", type: "1年アトラクション", desc: "ハイアンドロー、ブラックジャック、ダーツ" },
             { id: 6, name: "1年6組", label: "メリーゴーランド", type: "1年アトラクション", desc: "メリーゴーランド" },
+            { id: 7, name: "1年7組", label: "占い", type: "1年アトラクション", desc: "占い" },
             
             // 高校2年生 (物品販売・出展) - id: 8~14
             { id: 8, name: "2年1組", label: "缶バッジ・チェキ", type: "2年物販・展示", desc: "缶バッジ、チェキ" },
@@ -359,7 +360,7 @@
             isDrawing = true;
             let candidateSpots = [];
             if (lapCount === 1) {
-                const stampsAttraction = stamps.filter(id => id <= 6);
+                const stampsAttraction = stamps.filter(id => id <= 7);
                 const stampsShop = stamps.filter(id => id >= 8);
                 const needAttraction = Math.max(0, 4 - stampsAttraction.length);
                 const needShop = Math.max(0, 1 - stampsShop.length);
@@ -375,7 +376,7 @@
                 }
 
                 if (targetGenre === 'ATTRACTION') {
-                    candidateSpots = SPOTS.filter(s => s.id <= 6 && !visitedSpots.includes(s.id));
+                    candidateSpots = SPOTS.filter(s => s.id <= 7 && !visitedSpots.includes(s.id));
                 } else {
                     candidateSpots = SPOTS.filter(s => s.id >= 8 && !visitedSpots.includes(s.id));
                 }
@@ -449,7 +450,7 @@
             }
 
             if (!currentTargetId) {
-                const stampsA = stamps.filter(id => id <= 6).length;
+                const stampsA = stamps.filter(id => id <= 7).length;
                 const stampsB = stamps.filter(id => id >= 8).length;
                 const progressPanel = lapCount === 1 ? `
                     <div class="w-full flex justify-around mb-4 bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
