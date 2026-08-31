@@ -130,38 +130,36 @@
             </div>
         </div>
 
-        <!-- プレイ前確認モーダル（追加部分） -->
+        <!-- プレイ前の遊び方案内モーダル -->
         <div id="welcome-confirm-modal" class="hidden absolute inset-0 bg-slate-900/95 backdrop-blur-md z-[6000] flex items-center justify-center p-4">
             <div class="bg-white rounded-3xl p-6 w-full max-w-sm text-center shadow-2xl animate-fade-in-up">
-                <div class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-4 text-rose-600">
-                    <i data-lucide="alert-triangle" class="w-8 h-8"></i>
+                <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-600">
+                    <i data-lucide="smartphone" class="w-8 h-8"></i>
                 </div>
-                <h3 class="text-xl font-black text-rose-700 mb-4 tracking-tight">⚠️ 始める前のお願い</h3>
+                <h3 class="text-2xl font-black text-indigo-900 mb-2 tracking-tight">デジタルスタンプラリー</h3>
+                <p class="text-xs text-slate-500 font-bold mb-5">遊び方を確認してスタートしよう！</p>
                 
-                <div class="text-left bg-rose-50 border-2 border-rose-200 rounded-2xl p-4 mb-6 space-y-3">
-                    <p class="text-sm font-bold text-slate-800 leading-relaxed">
-                        LINEやInstagramから開いたり、iPhoneの「コントロールセンターのQRスキャナー」を使っていませんか？
-                    </p>
-                    <p class="text-[11px] text-rose-700 font-bold leading-relaxed">
-                        そのまま遊ぶと、画面を閉じた瞬間に<span class="bg-yellow-200 text-rose-900 px-1">集めたスタンプがすべて消えてしまいます！</span>（一時的な使い捨ての画面になっているためです）
-                    </p>
-                    <div class="border-t border-rose-200 pt-3 mt-3 space-y-2">
-                        <p class="text-xs text-slate-800 font-black">【正しい開き方（スタンプを保存するため）】</p>
-                        <p class="text-[11px] text-slate-700 font-bold leading-relaxed flex items-start">
-                            <span class="bg-indigo-100 text-indigo-800 px-1.5 py-0.5 rounded mr-1.5 shrink-0">iPhone</span>
-                            スマホの「標準カメラアプリ」で読み取り、「Safari」で開いてください。
-                        </p>
-                        <p class="text-[11px] text-slate-700 font-bold leading-relaxed flex items-start">
-                            <span class="bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded mr-1.5 shrink-0">Android</span>
-                            スマホの「標準カメラ」または「Googleレンズ」で読み取り、「Chrome」等のブラウザで開いてください。
-                        </p>
+                <div class="space-y-3 mb-6 text-left">
+                    <div class="flex items-center bg-indigo-50 border-2 border-indigo-100 rounded-2xl p-4">
+                        <div class="w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-black text-lg mr-3 shrink-0">1</div>
+                        <div>
+                            <p class="text-sm font-black text-indigo-900 mb-0.5">スマホのカメラアプリを使おう</p>
+                            <p class="text-xs text-slate-600 font-bold leading-relaxed">スマホのカメラアプリからQRコードを読み取ってください。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center bg-emerald-50 border-2 border-emerald-100 rounded-2xl p-4">
+                        <div class="w-10 h-10 bg-emerald-500 text-white rounded-full flex items-center justify-center font-black text-lg mr-3 shrink-0">2</div>
+                        <div>
+                            <p class="text-sm font-black text-emerald-900 mb-0.5">QRコードを読み取って集めよう</p>
+                            <p class="text-xs text-slate-600 font-bold leading-relaxed">QRコードを読み取って、スタンプを集めていくデジタルスタンプラリーです。</p>
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex items-center justify-start mb-6 bg-slate-50 p-3 rounded-xl border border-slate-200 text-left">
                     <input type="checkbox" id="browser-check" class="w-5 h-5 text-indigo-600 rounded mr-3 shrink-0" onchange="toggleConfirmBtn()">
                     <label for="browser-check" class="text-xs font-bold text-slate-700 leading-tight cursor-pointer">
-                        はい、標準のカメラアプリで読み取り、SafariやChromeで開いています！
+                        内容を確認しました
                     </label>
                 </div>
 
